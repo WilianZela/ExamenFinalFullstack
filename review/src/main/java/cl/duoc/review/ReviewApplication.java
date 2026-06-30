@@ -1,4 +1,4 @@
-package com.duoc.review;
+package cl.duoc.review;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -8,11 +8,11 @@
 		<version>4.0.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.duoc</groupId>
+	<groupId>cl.duoc</groupId>
 	<artifactId>review</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>review</name>
+	<description>Review Service</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<spring-cloud.version>2025.1.2</spring-cloud.version>
+		<spring-cloud.version>2025.1.1</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -44,8 +44,8 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -70,23 +70,39 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation-test</artifactId>
-			<scope>test</scope>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
-			<scope>test</scope>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-flyway</artifactId>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.flywaydb</groupId>
+    		<artifactId>flyway-mysql</artifactId>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+    		<groupId>org.springdoc</groupId>
+    		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    		<version>3.0.3</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-test</artifactId>
+    		<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -150,6 +166,16 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+    			<groupId>org.flywaydb</groupId>
+    			<artifactId>flyway-maven-plugin</artifactId>
+    			<version>11.14.1</version>
+    			<configuration>
+        			<url>jdbc:mysql://localhost:3313/review</url>
+        			<user>examen</user>
+        			<password>examen123</password>
+    			</configuration>
 			</plugin>
 		</plugins>
 	</build>
