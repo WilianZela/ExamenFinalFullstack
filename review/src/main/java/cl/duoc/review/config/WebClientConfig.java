@@ -1,4 +1,4 @@
-package main.java.cl.duoc.review.config;
+package cl.duoc.review.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

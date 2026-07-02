@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ReviewApplication",
+            "request": "launch",
+            "mainClass": "cl.duoc.review.ReviewApplication",
+            "projectName": "review"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-EurekaserverApplication<eurekaserver>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
