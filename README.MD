@@ -261,3 +261,30 @@ IE 2.5.2 Explica su aporte personal al proyecto, justificando commits, tareas as
 IE 3.1.2 Explica con claridad el funcionamiento de las pruebas unitarias generadas en el proyecto, justificando decisiones técnicas y relacionándolas con el dominio del microservicio, e integra nuevas pruebas unitarias en tiempo acotado, aplicando correctamente la lógica requerida y manteniendo la consistencia del proyecto. (ARCHIVO README EN EL PROYECTO)
 
 IE 3.2.2 Explica la documentación técnica generada con Swagger/OpenAPI, recorriendo rutas, respuestas, modelos y ejemplos, y demostrando consistencia entre la documentación y el comportamiento real del código. (ARCHIVO README EN EL PROYECTO)
+
+
+************************************************************************
+
+"Este proyecto corresponde al microservicio de reseñas (Review Service). Su función es permitir que un usuario autenticado pueda crear, consultar, actualizar y eliminar reseñas de los lugares que ha visitado durante sus viajes. Además, cada reseña puede tener etiquetas, como por ejemplo 'buen servicio' o 'limpio'.
+
+Para asegurar que el sistema sea estable, implementé un manejo de errores global. Esto significa que si ocurre un problema, como datos mal ingresados o un error interno, el usuario siempre recibe una respuesta clara con el código HTTP correspondiente, en lugar de que la aplicación falle.
+
+En cuanto a la base de datos, diseñé dos tablas. La primera almacena la información principal de las reseñas, como el destino, el usuario, la calificación y el comentario. La segunda almacena las etiquetas asociadas a cada reseña. La relación es de uno a muchos, ya que una reseña puede tener varias etiquetas.
+
+Utilicé JPA para mapear las entidades con la base de datos y los repositorios extienden JpaRepository, lo que facilita implementar todas las operaciones CRUD, como crear, listar, buscar, actualizar y eliminar reseñas y etiquetas.
+
+También agregué validaciones mediante Bean Validation, para asegurar que los datos ingresados sean correctos. Por ejemplo, que el destino exista, que la calificación esté entre 1 y 5, que el nombre del lugar no esté vacío y que el comentario no supere el tamaño permitido.
+
+En la lógica de negocio, antes de guardar una reseña, el sistema primero valida el token del usuario mediante el Login Service. Después verifica que el destino exista consultando el Destination Service. Además, cuando alguien intenta modificar o eliminar una reseña, el sistema comprueba que sea el propietario de esa reseña.
+
+Para facilitar el seguimiento de la aplicación, implementé logs con SLF4J, registrando eventos importantes como la creación o eliminación de reseñas y posibles errores.
+
+La comunicación con otros microservicios se realiza mediante WebClient, utilizando Eureka para el descubrimiento de servicios y el API Gateway como punto de entrada. Si alguno de los servicios externos no responde, el sistema captura el error y devuelve una respuesta controlada sin interrumpir el funcionamiento.
+
+El desarrollo fue gestionado en GitHub, realizando commits separados para cada avance importante, como la creación de entidades, servicios, controladores, migraciones y pruebas.
+
+También desarrollé pruebas unitarias con JUnit 5 y Mockito, simulando las dependencias externas para comprobar que la lógica funciona correctamente. Se probaron casos como crear una reseña con un token válido, rechazar un token inválido, verificar destinos inexistentes y asegurar que solo el autor pueda eliminar su propia reseña.
+
+Para documentar la API utilicé Swagger/OpenAPI, lo que permite visualizar y probar todos los endpoints directamente desde el navegador.
+
+Finalmente, el proyecto está configurado con Docker, MySQL, Flyway para las migraciones, Eureka Server, API Gateway y archivos YAML para la configuración de los servicios. La arquitectura sigue el patrón Controller-Service-Repository, donde cada capa tiene una responsabilidad específica: los controladores reciben las peticiones, los servicios contienen la lógica de negocio, los repositorios acceden a la base de datos y las entidades representan la información almacenada.
