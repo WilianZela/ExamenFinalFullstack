@@ -9,9 +9,8 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true   # 🔑 fuerza coincidencia con nombres en minúscula
+          lower-case-service-id: true
       routes:
-        # API Routes
         - id: login-service
           uri: lb://login
           predicates:
@@ -28,6 +27,12 @@ spring:
           uri: lb://traveler
           predicates:
             - Path=/api/v1/traveler/**
+          filters:
+            - RewritePath=/api/v1/(?<segment>.*), /api/v1/${segment}
+        - id: review-service
+          uri: lb://review
+          predicates:
+            - Path=/api/v1/review/**
           filters:
             - RewritePath=/api/v1/(?<segment>.*), /api/v1/${segment}
 eureka:
